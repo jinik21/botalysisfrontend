@@ -5,7 +5,7 @@ import LandingPage from "./components/pages/LandingPage";
 import LoginPage from "./components/pages/LoginPage";
 import RegistrationPage from "./components/pages/RegistrationPage";
 
-
+//This project is used in a hackathon
 
 const App = () => (
 
