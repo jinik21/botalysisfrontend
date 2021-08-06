@@ -45,7 +45,7 @@ import "react-toggle/style.css"
 
 
             <br/><br/>
-            <label htmlFor="admin"><b>Would you like to register as an Admin?</b></label><br/>
+            <label htmlFor="admin"><b>Would you like to Login as an Admin?</b></label><br/>
             <Toggle
             defaultChecked={this.state.admin}
             name='admin'

@@ -39,17 +39,17 @@ import "react-toggle/style.css"
       <div>
       <form onSubmit = {this.onSubmit} >
 
-          <label htmlFor="username"><b>Username</b></label><br/>
+          <label htmlFor="username"><b>Username : </b></label>
           <input type="username" placeholder="Enter Username" id="username" name="username" value={data.username} onChange = {this.onChange} required/>
 
           <br/><br/>
 
-          <label htmlFor="email"><b>Email</b></label><br/>
+          <label htmlFor="email"><b>Email : </b></label>
           <input type="email" placeholder="Enter Email" id="email" name="email" value={data.email} onChange = {this.onChange} required/>
 
           <br/><br/>
 
-          <label htmlFor="password"><b>Password</b></label><br/>
+          <label htmlFor="password"><b>Password : </b></label>
           <input type="password" placeholder="Enter Password" id="password" name="password" value={data.password} onChange = {this.onChange} required/>
           <br/><br/>
           

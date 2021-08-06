@@ -645,7 +645,7 @@ section.bel .logo {
 }
 
 .demo:hover .phone {
-	left: 2rem;`
+	left: 2rem;
 }
 
 .demo:hover .steps {
@@ -1069,7 +1069,6 @@ section.white.post {
 .post-sidebar ul {
 	list-style: none;
 	padding: 0;
-	margin: ;
 }
 
 /* Grid */
