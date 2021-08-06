@@ -32,11 +32,11 @@ render(){
   return(
 
       <div>
-          <h1>Login Page</h1>
+          <h1>Login</h1>
           <LoginForm submit={this.submit}/>
           <p id="status"></p>
           <p>Make a new account? Right here.</p>
-          <Link to="/registration" className="button">Registration</Link>
+          <Link to="/registration" className="button">Signup</Link>
       </div>
 
     );

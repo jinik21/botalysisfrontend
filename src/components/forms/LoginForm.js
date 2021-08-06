@@ -1,6 +1,9 @@
 import React from 'react';
+import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from 'mdbreact';
 import propTypes from 'prop-types';
 import {Button} from 'semantic-ui-react';
+import Toggle from 'react-toggle';
+import "react-toggle/style.css"
 
  class LoginForm extends React.Component {
    state = {
@@ -33,16 +36,22 @@ import {Button} from 'semantic-ui-react';
 
         <form onSubmit = {this.onSubmit} >
             <label htmlFor="email"><b>Email</b></label><br/>
-            <input type="email" placeholder="Enter Email" id="email" name="email" value={data.email} onChange = {this.onChange} required/>
+            <input id="login" className="fadeIn second" type="email" placeholder="Enter Email" id="email" name="email" value={data.email} onChange = {this.onChange} required/>
 
             <br/><br/>
 
             <label htmlFor="password"><b>Password</b></label><br/>
-            <input type="password" placeholder="Enter Password" id="password" name="password" value={data.password} onChange = {this.onChange} required/>
+            <input id="password" className="fadeIn third" type="password" placeholder="Enter Password" id="password" name="password" value={data.password} onChange = {this.onChange} required/>
 
 
             <br/><br/>
-            <Button type="submit" primary>Login</Button>
+            <label htmlFor="admin"><b>Would you like to register as an Admin?</b></label><br/>
+            <Toggle
+            defaultChecked={this.state.admin}
+            name='admin'
+            value='true' onChange = {this.onChange}/>
+            <br/><br/>
+            <Button type="submit" primary>Signin</Button>
         </form>
 
 
