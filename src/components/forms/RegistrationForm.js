@@ -2,8 +2,11 @@ import React from 'react';
 import propTypes from 'prop-types';
 import {Button } from 'semantic-ui-react';
 import Toggle from 'react-toggle';
-import "react-toggle/style.css"
-
+import "react-toggle/style.css";
+import 'react-phone-number-input/style.css';
+import PhoneInput from 'react-phone-number-input';
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
 
  class RegistrationForm extends React.Component {
    state = {
@@ -12,6 +15,7 @@ import "react-toggle/style.css"
      data: {
        username: '',
        email: '',
+       phone: '',
        password: '',
        admin:'false'
      },
@@ -33,26 +37,42 @@ import "react-toggle/style.css"
 
    render() {
      const {data} = this.state;
+     const options = [
+      'None','Mumbai, India', 'Manhattan, USA', 'Sydney, Australia', 'London, UK', 'Delhi, India'
+    ];
+    const defaultOption = options[0];
 
      return(
 
       <div>
       <form onSubmit = {this.onSubmit} >
 
-          <label htmlFor="username"><b>Username : </b></label>
+          <label htmlFor="username"><b>Full Name</b></label><br/>
           <input type="username" placeholder="Enter Username" id="username" name="username" value={data.username} onChange = {this.onChange} required/>
 
           <br/><br/>
 
-          <label htmlFor="email"><b>Email : </b></label>
+          <label htmlFor="email"><b>Email</b></label><br/>
           <input type="email" placeholder="Enter Email" id="email" name="email" value={data.email} onChange = {this.onChange} required/>
 
           <br/><br/>
 
-          <label htmlFor="password"><b>Password : </b></label>
+          <label htmlFor="phone"><b>Phone No.</b></label><br/>
+          <input placeholder="Phone(with country code)" id="phone" name="phone" value={data.phone} onChange = {this.onChange} required/>
+
+          <br/><br/>
+
+          <label htmlFor="password"><b>Password</b></label><br/>
+          <input type="password" placeholder="Enter Password" id="password" name="password" value={data.password} onChange = {this.onChange} required/>
+          <br/><br/>
+
+          <label htmlFor="password"><b>Confirm Password</b></label><br/>
           <input type="password" placeholder="Enter Password" id="password" name="password" value={data.password} onChange = {this.onChange} required/>
           <br/><br/>
           
+          <label htmlFor="branch"><b>Branch</b></label><br/>
+          <Dropdown className="branch" id="email" name="Branch" options={options} onChange={this.onChange} value={defaultOption} placeholder="Select an option" required  />
+          <br/><br/>
 
           <button type="submit" className="button">Register</button>
       </form>
