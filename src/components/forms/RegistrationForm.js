@@ -16,6 +16,7 @@ import 'react-dropdown/style.css';
        username: '',
        email: '',
        phone: '',
+       branch: '',
        password: '',
        cnfrmpassword: '',
        admin:'false'
@@ -36,17 +37,16 @@ import 'react-dropdown/style.css';
       this.props.submit(this.state.data);
    };*/
    onSubmitSignUp = () => {
-    if (this.state.signUpPassword.length >= 8) {
-      this.setState({ validpass: true });
-      if(this.state.signUpEmail.toLowerCase().endsWith('@thapar.edu')){
+    if (this.state.data.password.length >= 8) {
       fetch('https://portfoliohubbackend.herokuapp.com/signup', {
         method: 'post',
         headers: { 'Content-type': 'application/json' },
         body: JSON.stringify({
-          name: this.state.signUpName,
+          name: this.state.data.username,
           email: this.state.signUpEmail,
-          password: this.state.signUpPassword,
-
+          phone: this.state.data.phone,
+          branch: this.state.data.branch,
+          password: this.state.data.password
         })
       })
         .then(response => response.json())
@@ -58,10 +58,6 @@ import 'react-dropdown/style.css';
             this.setState({ validpass: true });
           }
         })
-    }
-    else {
-      this.setState({ validpass: false });
-    }
   }
   else {
     this.setState({ validpass: false });
@@ -103,7 +99,7 @@ import 'react-dropdown/style.css';
           <br/><br/>
           
           <label htmlFor="branch"><b>Branch</b></label><br/>
-          <Dropdown className="branch" id="email" name="Branch" options={options} onChange={this.onChange} value={defaultOption} placeholder="Select an option" required  />
+          <Dropdown className="branch" id="email" name="Branch" options={options} onChange={this.onChange} value={data.branch} placeholder="Select an option" required  />
           <br/><br/>
 
           <button type="submit" className="button">Register</button>
