@@ -17,6 +17,7 @@ import 'react-dropdown/style.css';
        email: '',
        phone: '',
        password: '',
+       cnfrmpassword: '',
        admin:'false'
      },
      loading: false,
@@ -26,15 +27,46 @@ import 'react-dropdown/style.css';
    //Checks for the change of state and then assigns the form data to the state.
    onChange = e => this.setState({data: {...this.state.data, [e.target.name]: e.target.value}});
 
-   onSubmit = (e) => {
+  /* onSubmit = (e) => {
       e.preventDefault();
       //console.log(this.state.data);
       //This checks if the user wants to be an admin and changes it to false to avoid security risks. It also notifies that a specified user wants to be an admin.
       //We can replace the "alert()" function that displays the admin status of a user with a sendEmail function that notifies the platform architect.
       
       this.props.submit(this.state.data);
-   };
+   };*/
+   onSubmitSignUp = () => {
+    if (this.state.signUpPassword.length >= 8) {
+      this.setState({ validpass: true });
+      if(this.state.signUpEmail.toLowerCase().endsWith('@thapar.edu')){
+      fetch('https://portfoliohubbackend.herokuapp.com/signup', {
+        method: 'post',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify({
+          name: this.state.signUpName,
+          email: this.state.signUpEmail,
+          password: this.state.signUpPassword,
 
+        })
+      })
+        .then(response => response.json())
+        .then(user => {
+          console.log(user);
+          if (user.id) {
+            this.props.loadUser(user);
+            // this.props.onRouteChange('home');
+            this.setState({ validpass: true });
+          }
+        })
+    }
+    else {
+      this.setState({ validpass: false });
+    }
+  }
+  else {
+    this.setState({ validpass: false });
+  }
+  }
    render() {
      const {data} = this.state;
      const options = [
@@ -45,7 +77,7 @@ import 'react-dropdown/style.css';
      return(
 
       <div>
-      <form onSubmit = {this.onSubmit} >
+      <form onSubmit = {this.onSubmitSignUp} >
 
           <label htmlFor="username"><b>Full Name</b></label><br/>
           <input type="username" placeholder="Enter Username" id="username" name="username" value={data.username} onChange = {this.onChange} required/>
@@ -67,7 +99,7 @@ import 'react-dropdown/style.css';
           <br/><br/>
 
           <label htmlFor="password"><b>Confirm Password</b></label><br/>
-          <input type="password" placeholder="Enter Password" id="password" name="password" value={data.password} onChange = {this.onChange} required/>
+          <input type="password" placeholder="Enter Password" id="password" name="cnfrmpassword" value={data.cnfrmpassword} onChange = {this.onChange} required/>
           <br/><br/>
           
           <label htmlFor="branch"><b>Branch</b></label><br/>

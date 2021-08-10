@@ -1,5 +1,4 @@
 import React from 'react';
-import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from 'mdbreact';
 import propTypes from 'prop-types';
 import {Button} from 'semantic-ui-react';
 import Toggle from 'react-toggle';
@@ -20,21 +19,40 @@ import "react-toggle/style.css"
    //Checks for the change of state and then loads the data entered in the form to the state.
    onChange = e => this.setState({data: {...this.state.data, [e.target.name]: e.target.value}});
 
-   onSubmit = (e) => {
+   /*onSubmit = (e) => {
      //Prevents the page from refreshing while submitting a form
      e.preventDefault();
      //This submits the data to the parent component.
      this.props.submit(this.state.data);
      //alert('Username is: ' + username.data.email);
-   };
-
+   };*/
+   onSubmitSignIn=()=>{
+    fetch('https://portfoliohubbackend.herokuapp.com/signin',{
+        method:'post',
+        headers:{'Content-type':'application/json'},
+        body:JSON.stringify({
+            email:this.state.data.email,
+            password:this.state.data.password,
+        })
+    })
+        .then(response=>response.json())
+        .then(user=>{
+          console.log(user);
+            if(user.id){
+              console.log("sucessufully signed in");
+            }
+            else{
+                console.log("hello")
+            }
+        })
+  }
    render() {
      const {data} = this.state;
 
      return(
 
 
-        <form onSubmit = {this.onSubmit} >
+        <form onSubmit = {this.onSubmitSignIn} >
             <label htmlFor="email"><b>Email</b></label><br/>
             <input id="login" className="fadeIn second" type="email" placeholder="Enter Email" id="email" name="email" value={data.email} onChange = {this.onChange} required/>
 
