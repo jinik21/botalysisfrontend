@@ -37,13 +37,14 @@ import 'react-dropdown/style.css';
       this.props.submit(this.state.data);
    };*/
    onSubmitSignUp = () => {
-    if (this.state.data.password.length >= 8) {
-      fetch('https://portfoliohubbackend.herokuapp.com/signup', {
+    if (this.state.data.password.length >= 8 && this.state.data.cnfrmpassword.length >= 8) {
+      if((this.state.data.password === this.state.data.cnfrmpassword )&& (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.data.email,))){
+        fetch('https://portfoliohubbackend.herokuapp.com/signup', {
         method: 'post',
         headers: { 'Content-type': 'application/json' },
         body: JSON.stringify({
           name: this.state.data.username,
-          email: this.state.signUpEmail,
+          email: this.state.data.email,
           phone: this.state.data.phone,
           branch: this.state.data.branch,
           password: this.state.data.password
@@ -55,12 +56,16 @@ import 'react-dropdown/style.css';
           if (user.id) {
             this.props.loadUser(user);
             // this.props.onRouteChange('home');
-            this.setState({ validpass: true });
+            this.setState({ loading: true });
           }
         })
+      }
+      else{
+        this.setState({ loading: false });
+      }
   }
   else {
-    this.setState({ validpass: false });
+    this.setState({ loading: false });
   }
   }
    render() {
