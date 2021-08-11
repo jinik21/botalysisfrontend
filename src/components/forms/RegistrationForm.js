@@ -47,7 +47,8 @@ import 'react-dropdown/style.css';
           email: this.state.data.email,
           phone: this.state.data.phone,
           branch: this.state.data.branch,
-          password: this.state.data.password
+          password: this.state.data.password,
+          picture: "https://i.dlpng.com/static/png/5066008-circled-user-icon-user-profile-icon-png-png-image-transparent-profile-icon-png-820_860_preview.png"
         })
       })
         .then(response => response.json())
