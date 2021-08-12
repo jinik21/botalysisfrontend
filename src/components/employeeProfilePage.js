@@ -1,7 +1,10 @@
 import React from "react";
 
 
-const EmployeeProfilePage = ()=>(
+  function EmployeeProfilePage(){
+    
+
+    return(
     <div class="student-profile py-4">
   <div class="container">
     <div class="row">
@@ -56,16 +59,17 @@ const EmployeeProfilePage = ()=>(
           <div style={{height: '26px'}}></div>
         <div class="card shadow-sm">
           <div class="card-header bg-transparent border-0">
-            <h3 class="mb-0"><i class="far fa-clone pr-1"></i>Other Information</h3>
+            <h3 class="mb-0"><i class="far fa-clone pr-1"></i>Add Audio File</h3>
           </div>
-          <div class="card-body pt-0">
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-          </div>
+          <div>
+            			
+		</div>
         </div>
       </div>
     </div>
   </div>
 </div>
-);
+    )
+  }
 
 export default EmployeeProfilePage;
