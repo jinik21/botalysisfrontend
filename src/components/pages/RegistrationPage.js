@@ -11,7 +11,7 @@ class RegistrationPage extends React.Component{
 //Gets the data and sumbits it for a post request
 submit = data => {
 
-  axios.post('http://localhost:3333/register',{
+  axios.post('http://localhost:3001/api/signin',{
     name:data.username,
     email:data.email,
     password:data.password,
