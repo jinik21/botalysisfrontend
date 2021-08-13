@@ -1,4 +1,5 @@
 import React from "react";
+import AudioInput from "./forms/audioInput";
 
 
   function EmployeeProfilePage(){
@@ -38,6 +39,7 @@ import React from "react";
         <div className="card shadow-sm">
           <div className="card-header bg-transparent border-0">
             <h3 className="mb-0"><i class="far fa-clone pr-1"></i>Add Audio File</h3>
+            <AudioInput/>
           </div>
         </div>
         
