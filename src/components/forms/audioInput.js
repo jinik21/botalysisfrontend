@@ -1,7 +1,9 @@
 import axios from 'axios';
- 
 import React,{Component} from 'react';
- 
+import firebase from '../../firebase';
+
+var storageRef = firebase.storage().ref();
+
 class AudioInput extends Component {
   
     state = {
@@ -11,7 +13,7 @@ class AudioInput extends Component {
       this.setState({ selectedFile: event.target.files[0] });
     
     };
-    onFileUpload = () => {
+    onFileUpload = async () => {
       const formData = new FormData();
       formData.append(
         "myFile",
@@ -19,7 +21,15 @@ class AudioInput extends Component {
         this.state.selectedFile.name
       );
       console.log(this.state.selectedFile);
-      axios.post("api/uploadfile", formData);
+      // axios.post("api/uploadfile", formData);
+      try{
+        var mountainsRef = storageRef.child(this.state.selectedFile.name);
+        await mountainsRef.put({...this.state.selectedFile});
+        const res = await mountainsRef.getDownloadURL();
+        console.log(res);
+      }catch(err){
+        console.log(err)
+      }
     };
     fileData = () => {
     
