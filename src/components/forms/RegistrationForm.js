@@ -37,7 +37,7 @@ import 'react-dropdown/style.css';
      console.log(this.state.data);
     if (this.state.data.password.length >= 8 && this.state.data.cnfrmpassword.length >= 8) {
       if((this.state.data.password === this.state.data.cnfrmpassword )&& (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.data.email,))){
-        fetch('https://portfoliohubbackend.herokuapp.com/signup', {
+        fetch('http://localhost:3001/api/signup', {
         method: 'post',
         headers: { 'Content-type': 'application/json' },
         body: JSON.stringify({
