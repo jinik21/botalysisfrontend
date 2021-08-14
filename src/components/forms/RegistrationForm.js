@@ -105,7 +105,7 @@ import 'react-dropdown/style.css';
           <br/><br/>
           
           <label htmlFor="branch"><b>Branch</b></label><br/>
-          <Dropdown className="branch" id="email" name="Branch" options={options} onChange={this.onChange} value={data.branch} placeholder="Select an option" required  />
+          <Dropdown className="branch" id="email" name="branch" options={options} onChange={this.onChange} value={data.branch} placeholder="Select an option" required  />
           <br/><br/>
 
           <button type="submit" className="button">Register</button>
