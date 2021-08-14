@@ -34,8 +34,7 @@ import 'react-dropdown/style.css';
    }
    onSubmitSignUp = (event) => {
      event.preventDefault();
-     console.log(this.state.data);
-    if (this.state.data.password.length >= 8 && this.state.data.cnfrmpassword.length >= 8) {
+    if (this.state.data.password.length >= 8 && this.state.data.cnfrmpassword.length >= 8 && this.state.data.phone.length==10) {
       if((this.state.data.password === this.state.data.cnfrmpassword )&& (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.data.email,))){
         fetch('https://portfoliohubbackend.herokuapp.com/signup', {
         method: 'post',
@@ -54,6 +53,7 @@ import 'react-dropdown/style.css';
           console.log(user);
           if (user.id) {
             this.props.loadUser(user);
+            console.log(this.props);
             // this.props.onRouteChange('home');
             this.setState({ loading: true });
           }
