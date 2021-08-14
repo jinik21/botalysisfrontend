@@ -26,17 +26,15 @@ import 'react-dropdown/style.css';
    };
 
    //Checks for the change of state and then assigns the form data to the state.
-   onChange = e => this.setState({data: {...this.state.data, [e.target.name]: e.target.value}});
-
-  /* onSubmit = (e) => {
-      e.preventDefault();
-      //console.log(this.state.data);
-      //This checks if the user wants to be an admin and changes it to false to avoid security risks. It also notifies that a specified user wants to be an admin.
-      //We can replace the "alert()" function that displays the admin status of a user with a sendEmail function that notifies the platform architect.
-      
-      this.props.submit(this.state.data);
-   };*/
-   onSubmitSignUp = () => {
+   onChange = e => {
+     this.setState({data: {...this.state.data, [e.target.name]: e.target.value}});
+   }
+   onbranchChange = e => {
+     this.setState({data: {...this.state.data, branch: e.value}});
+   }
+   onSubmitSignUp = (event) => {
+     event.preventDefault();
+     console.log(this.state.data);
     if (this.state.data.password.length >= 8 && this.state.data.cnfrmpassword.length >= 8) {
       if((this.state.data.password === this.state.data.cnfrmpassword )&& (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.data.email,))){
         fetch('https://portfoliohubbackend.herokuapp.com/signup', {
@@ -105,7 +103,7 @@ import 'react-dropdown/style.css';
           <br/><br/>
           
           <label htmlFor="branch"><b>Branch</b></label><br/>
-          <Dropdown className="branch" id="email" name="branch" options={options} onChange={this.onChange} value={data.branch} placeholder="Select an option" required  />
+          <Dropdown className="branch" id="email" name="branch" options={options} onChange={this.onbranchChange} value={data.branch} placeholder="Select an option" required  />
           <br/><br/>
 
           <button type="submit" className="button">Register</button>
