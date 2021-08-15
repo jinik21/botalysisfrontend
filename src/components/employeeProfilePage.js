@@ -12,7 +12,7 @@ import AudioInput from "./forms/audioInput";
       <div className="col-lg-4">
         <div className="card shadow-sm">
           <div className="card-header bg-transparent text-center">
-            <img className="profile_img" src="https://i.dlpng.com/static/png/5066008-circled-user-icon-user-profile-icon-png-png-image-transparent-profile-icon-png-820_860_preview.png" alt="student dp"></img>
+            <img className="profile_img" src="../images/user.svg" alt="student dp"></img>
             <h3>Ishmam Ahasan Samin</h3>
           </div>
           <div className="card-body">

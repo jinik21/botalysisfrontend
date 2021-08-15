@@ -1,7 +1,16 @@
 import React from "react";
 
 
-const AdminProfilePage = ()=>(
+class AdminProfilePage extends React.Component{
+  state={
+    data:{
+      employeeName:'',
+    }
+  }
+  onChange =e=>this.setState({data:{...this.state.data,[e.target.name]:e.target.value}});
+  render(){
+    return(
+    <div>
     <div class="student-profile py-4">
   <div class="container">
     <div class="row">
@@ -54,18 +63,18 @@ const AdminProfilePage = ()=>(
           </div>
         </div>
           <div style={{height: '26px'}}></div>
-        <div class="card shadow-sm">
-          <div class="card-header bg-transparent border-0">
-            <h3 class="mb-0"><i class="far fa-clone pr-1"></i>Other Information</h3>
-          </div>
-          <div class="card-body pt-0">
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-          </div>
+        <div>
+          <form> 
+            <label htmlFor="employeeSearch"><b>Enter Employee Name</b></label><br/>
+            <input id="employeeSearch" className="fadeIn third" type="text" placeholder="Enter Employee Name" name="employeeName" value={this.state.data.employeeName} onChange = {this.onChange} required/>
+          </form>
         </div>
       </div>
     </div>
   </div>
 </div>
-);
+</div>)
+  }
+}
 
 export default AdminProfilePage;
