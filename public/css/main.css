@@ -557,7 +557,7 @@ header nav a.active:after {
 
 .hero {
 	text-align: center;
-	padding: 6rem 6rem 0;
+	padding: 0rem 6rem 0;
 	margin: auto;
 	max-width: 768px;
 	margin-top: 9rem;
