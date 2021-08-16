@@ -7,10 +7,12 @@ import 'react-phone-number-input/style.css';
 import PhoneInput from 'react-phone-number-input';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
+import { withRouter } from 'react-router';
 
  class RegistrationForm extends React.Component {
-   state = {
-
+  constructor(props){
+    super(props); 
+  this.state = {
      //Creats an object that can store the variables
      data: {
        username: '',
@@ -24,6 +26,7 @@ import 'react-dropdown/style.css';
      loading: false,
      errors: {}
    };
+  }
 
    //Checks for the change of state and then assigns the form data to the state.
    onChange = e => {
@@ -51,8 +54,8 @@ import 'react-dropdown/style.css';
         .then(response => response.json())
         .then(user => {
           console.log(user);
-          if (user.id) {
-            this.props.loadUser(user);
+          if (user.email) {
+            // this.props.loadUser(user);
             console.log(this.props);
             // this.props.onRouteChange('home');
             this.setState({ loading: true });
@@ -118,4 +121,4 @@ import 'react-dropdown/style.css';
    submit: propTypes.func.isRequired
  };
 
- export default RegistrationForm;
+ export default withRouter(RegistrationForm);
