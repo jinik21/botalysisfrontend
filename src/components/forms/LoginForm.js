@@ -2,10 +2,13 @@ import React from 'react';
 import propTypes from 'prop-types';
 import {Button} from 'semantic-ui-react';
 import Toggle from 'react-toggle';
-import "react-toggle/style.css"
+import "react-toggle/style.css";
+import { withRouter } from 'react-router';
 
  class LoginForm extends React.Component {
-   state = {
+  constructor(props){
+    super(props); 
+   this.state = {
 
      //creating the data variable that holds the email and password to be passed on
      data: {
@@ -14,7 +17,8 @@ import "react-toggle/style.css"
      },
      loading: false,
      errors: {}
-   };
+   }
+  };
 
    //Checks for the change of state and then loads the data entered in the form to the state.
    onChange = e => this.setState({data: {...this.state.data, [e.target.name]: e.target.value}});
@@ -26,7 +30,8 @@ import "react-toggle/style.css"
      this.props.submit(this.state.data);
      //alert('Username is: ' + username.data.email);
    };*/
-   onSubmitSignIn=()=>{
+   onSubmitSignIn=(event)=>{
+     event.preventDefault();
     fetch('http://localhost:3001/api/signin',{
         method:'post',
         headers:{'Content-type':'application/json'},
@@ -38,8 +43,9 @@ import "react-toggle/style.css"
         .then(response=>response.json())
         .then(user=>{
           console.log(user);
-            if(user.id){
-              console.log("sucessufully signed in");
+            if(user.email){
+              localStorage.setItem("user", JSON.stringify(user));
+              this.props.history.push("/employeePage");
             }
             else{
                 console.log("hello")
@@ -81,4 +87,4 @@ import "react-toggle/style.css"
    submit: propTypes.func.isRequired
  };
 
- export default LoginForm;
+ export default withRouter(LoginForm);

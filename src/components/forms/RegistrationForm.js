@@ -58,7 +58,10 @@ import { withRouter } from 'react-router';
             // this.props.loadUser(user);
             console.log(this.props);
             // this.props.onRouteChange('home');
+            localStorage.setItem("user", JSON.stringify(user));
+            this.props.history.push("/employeePage");
             this.setState({ loading: true });
+            //localStorage.removeItem("user");
           }
         })
       }

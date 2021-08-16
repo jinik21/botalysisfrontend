@@ -3,8 +3,7 @@ import AudioInput from "./forms/audioInput";
 
 
   function EmployeeProfilePage(){
-    
-
+    const u = JSON.parse(localStorage.getItem("user"));
     return(
     <div className="student-profile py-4">
   <div className="container">
@@ -13,10 +12,10 @@ import AudioInput from "./forms/audioInput";
         <div className="card shadow-sm">
           <div className="card-header bg-transparent text-center">
             <img className="profile_img" src="../images/user.svg" alt="student dp"></img>
-            <h3>Ishmam Ahasan Samin</h3>
+            <h3>{u.name}</h3>
           </div>
           <div className="card-body">
-            <p className="mb-0"><strong class="pr-1">Employee ID:</strong>321000001</p>
+            <p className="mb-0"><strong class="pr-1">Username: </strong>{u.email.substring(0, u.email.lastIndexOf("@"))}</p>
           </div>
         </div>
       </div>
@@ -30,7 +29,7 @@ import AudioInput from "./forms/audioInput";
               <tr>
                 <th width="30%">Branch</th>
                 <td width="2%">:</td>
-                <td>Delhi</td>
+                <td>{u.branch}</td>
               </tr>
             </table>
           </div>
