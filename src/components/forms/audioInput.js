@@ -12,6 +12,12 @@ const negativePercentage = 14;
 const neutralPercentage = 20;
 const u = JSON.parse(localStorage.getItem("user"));
 
+const toBlob = (file) => {
+  return new Blob([file],{
+    type: 'audio/wav'
+  })
+}
+
 class AudioInput extends React.Component {
   
   constructor(props){
@@ -35,10 +41,11 @@ class AudioInput extends React.Component {
       console.log(this.state.selectedFile);
       // axios.post("api/uploadfile", formData);
       try{
+        const blob = toBlob(this.state.selectedFile);
+        console.log(blob);
         var mountainsRef = storageRef.child(this.state.selectedFile.name);
-        await mountainsRef.put({...this.state.selectedFile});
+        await mountainsRef.put(blob);
         const res = await mountainsRef.getDownloadURL();
-        console.log(res);
         fetch('http://localhost:3001/api/process_audio',{
         method:'post',
         headers:{'Content-type':'application/json'},
