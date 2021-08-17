@@ -4,18 +4,23 @@ import firebase from '../../firebase';
 import { CircularProgressbar, 
   CircularProgressbarWithChildren,
   buildStyles } from 'react-circular-progressbar';
+import { withRouter } from 'react-router';
 
 var storageRef = firebase.storage().ref();
 const positivePercentage = 66; 
 const negativePercentage = 14;
 const neutralPercentage = 20;
-class AudioInput extends Component {
-    // positivePercentage = 66;
-    // negativePercentage = 14;
-    // neutralPercentage = 20;
-    state = {
+const u = JSON.parse(localStorage.getItem("user"));
+
+class AudioInput extends React.Component {
+  
+  constructor(props){
+    super(props);
+    this.state = {
       selectedFile: null
-    };
+    }
+  };
+    
     onFileChange = event => {
       this.setState({ selectedFile: event.target.files[0] });
     
@@ -34,6 +39,16 @@ class AudioInput extends Component {
         await mountainsRef.put({...this.state.selectedFile});
         const res = await mountainsRef.getDownloadURL();
         console.log(res);
+        fetch('http://localhost:3001/api/process_audio',{
+        method:'post',
+        headers:{'Content-type':'application/json'},
+        body:JSON.stringify({
+          email: u.email,
+          link: res,
+        })
+    })
+        .then(response=>response.json())
+        
       }catch(err){
         console.log(err)
       }
@@ -125,4 +140,4 @@ class AudioInput extends Component {
 
   }
  
-  export default AudioInput;
+  export default withRouter(AudioInput);
