@@ -9,9 +9,7 @@ import {
 import { withRouter } from 'react-router';
 
 var storageRef = firebase.storage().ref();
-var positivePercentage = 66;
-var negativePercentage = 14;
-var neutralPercentage = 20;
+
 const u = JSON.parse(localStorage.getItem("user"));
 
 const toBlob = (file) => {
@@ -28,13 +26,15 @@ class AudioInput extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedFile: null
+      selectedFile: null,
+      positivePercentage : 66,
+      negativePercentage : 14,
+      neutralPercentage :20,
     }
   };
 
   onFileChange = event => {
     this.setState({ selectedFile: event.target.files[0] });
-
   };
   onFileUpload = async () => {
     const formData = new FormData();
@@ -74,14 +74,13 @@ class AudioInput extends React.Component {
           })
             .then(response => response.json())
             .then(data => {
-
-              positivePercentage = data.positive;
-              negativePercentage = data.negative;
-              neutralPercentage = data.neutral;
+              this.setState({ positivePercentage:data.positive });
+              this.setState({ negativePercentage:data.negative});
+              this.setState({ neutralPercentage:data.neutral });
               console.log(data);
             })
 
-          },5000);
+          },7000);
           
         })
 
@@ -134,8 +133,8 @@ class AudioInput extends React.Component {
             <tr>
               <th><CircularProgressbar
                 className="percentageBar"
-                value={positivePercentage}
-                text={`${positivePercentage}%`}
+                value={this.state.positivePercentage}
+                text={`${this.state.positivePercentage}%`}
                 styles={buildStyles({
                   strokeLinecap: 'butt',
                   textSize: '16px',
@@ -145,8 +144,8 @@ class AudioInput extends React.Component {
                   backgroundColor: '#E0D2D0',
                 })} /></th>
               <th><CircularProgressbar
-                value={neutralPercentage}
-                text={`${neutralPercentage}%`}
+                value={this.state.neutralPercentage}
+                text={`${this.state.neutralPercentage}%`}
                 styles={buildStyles({
                   strokeLinecap: 'butt',
                   textSize: '16px',
@@ -156,8 +155,8 @@ class AudioInput extends React.Component {
                   backgroundColor: '#E0D2D0',
                 })} /></th>
               <th><CircularProgressbar
-                value={negativePercentage}
-                text={`${negativePercentage}%`}
+                value={this.state.negativePercentage}
+                text={`${this.state.negativePercentage}%`}
                 styles={buildStyles({
                   strokeLinecap: 'butt',
                   textSize: '16px',
