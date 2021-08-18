@@ -48,7 +48,7 @@ import { withRouter } from 'react-router';
               this.props.history.push("/employeePage");
             }
             else{
-                console.log("hello")
+                alert('No matching Credentials!');
             }
         })
   }
@@ -75,7 +75,7 @@ import { withRouter } from 'react-router';
             name='admin'
             value='true' onChange = {this.onChange}/>
             <br/><br/>
-            <Button type="submit" primary>Signin</Button>
+            <Button style={{marginTop:'0'}}type="submit" primary>Signin</Button>
         </form>
 
 
