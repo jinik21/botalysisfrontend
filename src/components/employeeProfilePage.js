@@ -1,5 +1,6 @@
 import React from "react";
 import AudioInput from "./forms/audioInput";
+import Signout from "./pages/Signout";
 
 
   function EmployeeProfilePage(){
@@ -41,7 +42,9 @@ import AudioInput from "./forms/audioInput";
             <AudioInput/>
           </div>
         </div>
-        
+        <div>
+        <Signout />
+        </div>
       </div>
     </div>
   </div>
