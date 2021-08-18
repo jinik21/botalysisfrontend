@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React,{Component} from 'react';
 import firebase from '../../firebase';
 import { CircularProgressbar, 
@@ -16,6 +17,9 @@ const toBlob = (file) => {
     type: 'audio/wav'
   })
 }
+var metadata = {
+  contentType: 'audio/wav',
+};
 
 class AudioInput extends React.Component {
   
@@ -32,38 +36,37 @@ class AudioInput extends React.Component {
     };
     onFileUpload = async () => {
       const formData = new FormData();
-      if(this.state.selectedFile==null){
-        alert("No file Selected for upload!!!!");
+      formData.append(
+        "myFile",
+        this.state.selectedFile,
+        this.state.selectedFile.name
+      );
+      console.log(this.state.selectedFile);
+      // axios.post("api/uploadfile", formData);
+      try{
+        const blob = toBlob(this.state.selectedFile);
+        console.log(blob);
+        var mountainsRef = await storageRef.child(this.state.selectedFile.name);
+        await mountainsRef.put(blob,metadata);
+        const res = await mountainsRef.getDownloadURL();
+        console.log(res);
+        // setTimeout(()=>{},5000);
+        fetch('http://localhost:3001/api/process_audio',{
+        method:'post',
+        headers:{'Content-type':'application/json'},
+        body:JSON.stringify({
+          email: u.email,
+          link: res,
+        })
+    })
+        .then(response=>response.json())
+        .then(data=>{
+          console.log(data)
+        })
+        
+      }catch(err){
+        console.log(err)
       }
-      else{
-        formData.append(
-          "myFile",
-          this.state.selectedFile,
-          this.state.selectedFile.name
-        );
-        console.log(this.state.selectedFile);
-        // axios.post("api/uploadfile", formData);
-        try{
-          const blob = toBlob(this.state.selectedFile);
-          console.log(blob);
-          var mountainsRef = storageRef.child(this.state.selectedFile.name);
-          await mountainsRef.put(blob);
-          const res = await mountainsRef.getDownloadURL();
-          fetch('http://localhost:3001/api/process_audio',{
-          method:'post',
-          headers:{'Content-type':'application/json'},
-          body:JSON.stringify({
-            email: u.email,
-            link: res,
-          })
-      })
-          .then(response=>response.json())
-          
-        }catch(err){
-          console.log(err)
-        }
-      }
-      
     };
     fileData = () => {
     
@@ -98,8 +101,8 @@ class AudioInput extends React.Component {
       return (
         <div> 
             <div>
-                <input  type="file" onChange={this.onFileChange} className = "audioInputFile" />
-                <button style={{backgroundColor:'#68b9ec'}} onClick={this.onFileUpload} className = "uploadButton">
+                <input type="file" onChange={this.onFileChange} className = "audioInputFile" />
+                <button onClick={this.onFileUpload} className = "uploadButton">
                   Upload!
                 </button>
             </div>
