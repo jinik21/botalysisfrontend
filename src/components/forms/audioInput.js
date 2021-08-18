@@ -52,6 +52,7 @@ class AudioInput extends React.Component {
       await mountainsRef.put(blob, metadata);
       const res = await mountainsRef.getDownloadURL();
       console.log(res);
+      console.log(u);
       // setTimeout(()=>{},5000);
       fetch('http://localhost:3001/api/process_audio', {
         method: 'post',
