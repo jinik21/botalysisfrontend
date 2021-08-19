@@ -10,7 +10,7 @@ import { withRouter } from 'react-router-dom';
 
 var storageRef = firebase.storage().ref();
 
-const u = JSON.parse(localStorage.getItem("user"));
+//const u = JSON.parse(localStorage.getItem("user"));
 
 const toBlob = (file) => {
   return new Blob([file], {
@@ -27,6 +27,7 @@ class AudioInput extends React.Component {
     super(props);
     this.state = {
       selectedFile: null,
+      u: JSON.parse(localStorage.getItem("user")),
       positivePercentage : 66,
       negativePercentage : 14,
       neutralPercentage :20,
@@ -55,13 +56,13 @@ class AudioInput extends React.Component {
         await mountainsRef.put(blob, metadata);
         const res = await mountainsRef.getDownloadURL();
         console.log(res);
-        console.log(u);
+        console.log(this.state.u);
         // setTimeout(()=>{},5000);
         fetch('http://localhost:3001/api/process_audio', {
           method: 'post',
           headers: { 'Content-type': 'application/json' },
           body: JSON.stringify({
-            email: u.email,
+            email: this.state.u.email,
             link: res,
           })
         })
@@ -73,7 +74,7 @@ class AudioInput extends React.Component {
               method: 'post',
               headers: { 'Content-type': 'application/json' },
               body: JSON.stringify({
-                email: u.email,
+                email: this.state.u.email,
               })
             })
               .then(response => response.json())
