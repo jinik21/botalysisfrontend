@@ -8,7 +8,7 @@ import RegistrationPage from "./components/pages/RegistrationPage";
 import EmployeeProfilePage from './components/employeeProfilePage';
 import AdminProfilePage from './components/adminPage'
 import EmployeeReport from './components/employeeReport';
-//import PrivateRoute from './route/PrivateRoute';
+import PrivateRoute from './route/PrivateRoute';
 
 //This project is used in a hackathon
 function App(){
@@ -18,7 +18,7 @@ function App(){
       <Route path="/login" exact component = {LoginPage}/>
       <Route path="/registration" exact component = {RegistrationPage}/>
       <Route path="/landing" exact component = {LandingPage}/>
-      <Route path="/employeePage" exact component = {EmployeeProfilePage}/>
+      <PrivateRoute path="/employeePage" exact component = {EmployeeProfilePage}/>
       <Route path="/adminPage" exact component = {AdminProfilePage}/>
       <Route path="/employeeReport" exact component={EmployeeReport}/>
       <Route path="/welcome" exact component={Welcome}/>
