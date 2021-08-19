@@ -3,8 +3,13 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
 const PrivateRoute = ({component: Component, ...rest}) => {
-    const isLogin = () => {
-        return false;
+    function isLogin(){
+        if(JSON.parse(localStorage.getItem("user"))){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     return (
