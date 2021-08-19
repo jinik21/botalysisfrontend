@@ -30,7 +30,6 @@ submit = data => {
 //This renders the HTML code
 render(){
   return(
-
       <div>
           <h1>Login</h1>
           <LoginForm submit={this.submit}/>

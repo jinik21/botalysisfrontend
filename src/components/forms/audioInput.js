@@ -6,7 +6,7 @@ import {
   CircularProgressbarWithChildren,
   buildStyles
 } from 'react-circular-progressbar';
-import { withRouter } from 'react-router';
+import { withRouter } from 'react-router-dom';
 
 var storageRef = firebase.storage().ref();
 

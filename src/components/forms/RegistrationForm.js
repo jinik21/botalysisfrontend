@@ -7,7 +7,7 @@ import 'react-phone-number-input/style.css';
 import PhoneInput from 'react-phone-number-input';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
-import { withRouter } from 'react-router';
+import { withRouter } from 'react-router-dom';
 
  class RegistrationForm extends React.Component {
   constructor(props){

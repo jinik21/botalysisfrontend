@@ -3,7 +3,8 @@ import propTypes from 'prop-types';
 import {Button} from 'semantic-ui-react';
 import Toggle from 'react-toggle';
 import "react-toggle/style.css";
-import { withRouter } from 'react-router';
+import { withRouter } from 'react-router-dom';
+
 
  class LoginForm extends React.Component {
   constructor(props){
