@@ -38,56 +38,59 @@ class AudioInput extends React.Component {
   };
   onFileUpload = async () => {
     const formData = new FormData();
-    formData.append(
-      "myFile",
-      this.state.selectedFile,
-      this.state.selectedFile.name
-    );
-    console.log(this.state.selectedFile);
-    // axios.post("api/uploadfile", formData);
-    try {
-      const blob = toBlob(this.state.selectedFile);
-      console.log(blob);
-      var mountainsRef = await storageRef.child(this.state.selectedFile.name);
-      await mountainsRef.put(blob, metadata);
-      const res = await mountainsRef.getDownloadURL();
-      console.log(res);
-      console.log(u);
-      // setTimeout(()=>{},5000);
-      fetch('http://localhost:3001/api/process_audio', {
-        method: 'post',
-        headers: { 'Content-type': 'application/json' },
-        body: JSON.stringify({
-          email: u.email,
-          link: res,
-        })
-      })
-        .then(response => response.json())
-        .then(data => {
-          console.log(data)
-          setTimeout(()=>{
-            fetch('http://localhost:3001/api/sentiment', {
-            method: 'post',
-            headers: { 'Content-type': 'application/json' },
-            body: JSON.stringify({
-              email: u.email,
-            })
+    if(this.state.selectedFile==null){
+      alert("No file Selected!!!");
+    }
+    else{
+      formData.append(
+        "myFile",
+        this.state.selectedFile,
+        this.state.selectedFile.name
+      );
+      console.log(this.state.selectedFile);
+      try {
+        const blob = toBlob(this.state.selectedFile);
+        console.log(blob);
+        var mountainsRef = await storageRef.child(this.state.selectedFile.name);
+        await mountainsRef.put(blob, metadata);
+        const res = await mountainsRef.getDownloadURL();
+        console.log(res);
+        console.log(u);
+        // setTimeout(()=>{},5000);
+        fetch('http://localhost:3001/api/process_audio', {
+          method: 'post',
+          headers: { 'Content-type': 'application/json' },
+          body: JSON.stringify({
+            email: u.email,
+            link: res,
           })
-            .then(response => response.json())
-            .then(data => {
-              this.setState({ positivePercentage:data.positive });
-              this.setState({ negativePercentage:data.negative});
-              this.setState({ neutralPercentage:data.neutral });
-              console.log(data);
-            })
-
-          },7000);
-          
         })
-
-
-    } catch (err) {
-      console.log(err)
+          .then(response => response.json())
+          .then(data => {
+            console.log(data)
+            setTimeout(()=>{
+              fetch('http://localhost:3001/api/sentiment', {
+              method: 'post',
+              headers: { 'Content-type': 'application/json' },
+              body: JSON.stringify({
+                email: u.email,
+              })
+            })
+              .then(response => response.json())
+              .then(data => {
+                this.setState({ positivePercentage:data.positive });
+                this.setState({ negativePercentage:data.negative});
+                this.setState({ neutralPercentage:data.neutral });
+                console.log(data);
+              })
+  
+            },7000);
+            
+          })
+      } 
+      catch (err) {
+        console.log(err)
+      }
     }
   };
   fileData = () => {
@@ -124,7 +127,7 @@ class AudioInput extends React.Component {
       <div>
         <div>
           <input type="file" onChange={this.onFileChange} className="audioInputFile" />
-          <button onClick={this.onFileUpload} className="uploadButton">
+          <button style={{backgroundColor:'rgba(56, 63, 95, 0.2)'}} onClick={this.onFileUpload} className="uploadButton">
             Upload!
           </button>
         </div>
