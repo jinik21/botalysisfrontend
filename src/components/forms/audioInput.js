@@ -28,9 +28,10 @@ class AudioInput extends React.Component {
     this.state = {
       selectedFile: null,
       u: JSON.parse(localStorage.getItem("user")),
-      positivePercentage : 66,
-      negativePercentage : 14,
-      neutralPercentage :20,
+      positivePercentage : null,
+      negativePercentage : null,
+      neutralPercentage :null,
+      tableShow : false,
     }
   };
 
@@ -46,7 +47,7 @@ class AudioInput extends React.Component {
       formData.append(
         "myFile",
         this.state.selectedFile,
-        this.state.selectedFile.name
+        this.state.selectedFile.name,
       );
       console.log(this.state.selectedFile);
       try {
@@ -69,6 +70,10 @@ class AudioInput extends React.Component {
           .then(response => response.json())
           .then(data => {
             console.log(data)
+            this.setState({ positivePercentage:0 });
+            this.setState({ negativePercentage:0});
+            this.setState({ neutralPercentage:0 });
+            this.setState({tableShow:true}),
             setTimeout(()=>{
               fetch('http://localhost:3001/api/sentiment', {
               method: 'post',
@@ -134,7 +139,7 @@ class AudioInput extends React.Component {
         </div>
         {this.fileData()}
         <div>
-          <table className="reportTable">
+          {this.state.tableShow?(<table className="reportTable">
             <tr>
               <th><CircularProgressbar
                 className="percentageBar"
@@ -171,7 +176,7 @@ class AudioInput extends React.Component {
                   backgroundColor: '#E0D2D0',
                 })} /></th>
             </tr>
-          </table>
+          </table>):<div></div>}
         </div>
       </div>
 

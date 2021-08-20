@@ -1,6 +1,7 @@
 import React from "react";
 import AudioInput from "./forms/audioInput";
 import Signout from "./pages/Signout";
+import EmployeeInfo from "./pages/employeeInfo";
 
 
   function EmployeeProfilePage(){
@@ -41,6 +42,9 @@ import Signout from "./pages/Signout";
             <h3 className="mb-0"><i class="far fa-clone pr-1"></i>Add Audio File</h3>
             <AudioInput/>
           </div>
+        </div>
+        <div>
+          <EmployeeInfo/>
         </div>
         <div>
         <Signout />

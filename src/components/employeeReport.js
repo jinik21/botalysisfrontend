@@ -46,7 +46,7 @@ class EmployeeReport extends React.Component{
                     </div>
                     </div>
                     <div>
-                    <table className = "reportTable">
+                    {/* <table className = "reportTable">
                         <tr>
                             <th><CircularProgressbar
                                     className = "percentageBar" 
@@ -83,7 +83,10 @@ class EmployeeReport extends React.Component{
                                         backgroundColor: '#E0D2D0',
                                     })} /></th>
                         </tr>
-                    </table>
+                    </table> */}
+                    {/* <button type="submit" onClick=>
+                        See All Previous Uploads
+                    </button> */}
                 </div>
             </div>
         );
