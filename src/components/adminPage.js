@@ -7,6 +7,7 @@ class AdminProfilePage extends React.Component{
     super(props);
     this.state={
       data:{
+        u: JSON.parse(localStorage.getItem("user")),
       email:'',
       showReport:false,
       info:[],
@@ -51,12 +52,7 @@ class AdminProfilePage extends React.Component{
         <div class="card shadow-sm">
           <div class="card-header bg-transparent text-center">
             <img class="profile_img" src="https://i.dlpng.com/static/png/5066008-circled-user-icon-user-profile-icon-png-png-image-transparent-profile-icon-png-820_860_preview.png" alt="student dp"></img>
-            <h3>Ishmam Ahasan Samin</h3>
-          </div>
-          <div class="card-body">
-            <p class="mb-0"><strong class="pr-1">Employee ID:</strong>321000001</p>
-            {/* <p class="mb-0"><strong class="pr-1">Class:</strong>4</p>
-            <p class="mb-0"><strong class="pr-1">Section:</strong>A</p> */}
+            <h3>{this.state.data.u.name}</h3>
           </div>
         </div>
       </div>
@@ -70,7 +66,7 @@ class AdminProfilePage extends React.Component{
               <tr>
                 <th width="30%">Branch</th>
                 <td width="2%">:</td>
-                <td>Delhi</td>
+                <td>{this.state.data.u.branch}</td>
               </tr>
             </table>
           </div>
