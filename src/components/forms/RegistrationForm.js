@@ -20,8 +20,7 @@ import { withRouter } from 'react-router-dom';
        phone: '',
        branch: '',
        password: '',
-       cnfrmpassword: '',
-       admin:'false'
+       cnfrmpassword: ''
      },
      loading: false,
      errors: {}

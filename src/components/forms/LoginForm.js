@@ -10,28 +10,27 @@ import { withRouter } from 'react-router-dom';
   constructor(props){
     super(props); 
    this.state = {
-
-     //creating the data variable that holds the email and password to be passed on
      data: {
        email: '',
-       password: ''
+       password: '',
+       admin:'false'
      },
      loading: false,
      errors: {}
    }
   };
 
-   //Checks for the change of state and then loads the data entered in the form to the state.
    onChange = e => this.setState({data: {...this.state.data, [e.target.name]: e.target.value}});
-
-   /*onSubmit = (e) => {
-     //Prevents the page from refreshing while submitting a form
-     e.preventDefault();
-     //This submits the data to the parent component.
-     this.props.submit(this.state.data);
-     //alert('Username is: ' + username.data.email);
-   };*/
+   onChangeToggle=e=>{
+    if(e.target.value=='false'){
+      this.setState({data:{...this.state.data,[e.target.name]:'true'}});
+    }
+    else{
+      this.setState({data:{...this.state.data,[e.target.name]:'false'}});
+    }
+   }
    onSubmitSignIn=(event)=>{
+     console.log(this.state.data.admin);
      event.preventDefault();
     fetch('http://localhost:3001/api/signin',{
         method:'post',
@@ -72,9 +71,9 @@ import { withRouter } from 'react-router-dom';
             <br/><br/>
             <label htmlFor="admin"><b>Would you like to Login as an Admin?</b></label><br/>
             <Toggle
-            defaultChecked={this.state.admin}
+            //defaultChecked={this.state.data.admin}
             name='admin'
-            value='true' onChange = {this.onChange}/>
+            value={data.admin} onChange = {this.onChangeToggle}/>
             <br/><br/>
             <Button style={{marginTop:'0'}}type="submit" primary>Signin</Button>
         </form>
