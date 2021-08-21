@@ -28,6 +28,7 @@ import { withRouter } from 'react-router-dom';
     else{
       this.setState({data:{...this.state.data,[e.target.name]:'false'}});
     }
+    console.log(this.state.data.admin);
    }
    onSubmitSignIn=(event)=>{
      console.log(this.state.data.admin);
