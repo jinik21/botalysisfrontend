@@ -38,6 +38,7 @@ import { withRouter } from 'react-router-dom';
         body:JSON.stringify({
             email:this.state.data.email,
             password:this.state.data.password,
+            admin:this.state.data.admin,
         })
     })
         .then(response=>response.json())

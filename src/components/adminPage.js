@@ -2,12 +2,44 @@ import React from "react";
 
 
 class AdminProfilePage extends React.Component{
-  state={
-    data:{
-      employeeName:'',
+  constructor(props){
+    super(props);
+    this.state={
+      data:{
+      email:'',
+      showReport:false,
+      info:[],
+      }
     }
   }
+
   onChange =e=>this.setState({data:{...this.state.data,[e.target.name]:e.target.value}});
+
+  clicked=async (e) => {
+    e.preventDefault();
+    try {
+       //console.log(this.state.u);
+       // setTimeout(()=>{},5000);
+       fetch('http://localhost:3001/api/allusersaudioadmin', {
+         method: 'post',
+         headers: { 'Content-type': 'application/json' },
+         body: JSON.stringify({
+           email: this.state.data.email
+         })
+       })
+         .then(response => response.json())
+         .then(data1 => {
+           //console.log(data1);
+           this.setState({data: {...this.state.data, info: data1}});
+           //this.setState({[this.state.data.info]:data1})
+           this.setState({data: {...this.state.data, showReport: true}});
+           console.log(this.state.data.showReport);
+         })
+     } 
+     catch (err) {
+       console.log(err)
+     }
+ }; 
   render(){
     return(
     <div>
@@ -39,36 +71,39 @@ class AdminProfilePage extends React.Component{
                 <td width="2%">:</td>
                 <td>Delhi</td>
               </tr>
-              {/* <tr>
-                <th width="30%">Academic Year	</th>
-                <td width="2%">:</td>
-                <td>2020</td>
-              </tr> */}
-              {/* <tr>
-                <th width="30%">Gender</th>
-                <td width="2%">:</td>
-                <td>Male</td>
-              </tr> */}
-              {/* <tr>
-                <th width="30%">Religion</th>
-                <td width="2%">:</td>
-                <td>Group</td>
-              </tr> */}
-              {/* <tr>
-                <th width="30%">blood</th>
-                <td width="2%">:</td>
-                <td>B+</td>
-              </tr> */}
             </table>
           </div>
         </div>
           <div style={{height: '26px'}}></div>
         <div>
-          <form> 
-            <label htmlFor="employeeSearch"><b>Enter Employee Name</b></label><br/>
-            <input id="employeeSearch" className="fadeIn third" type="text" placeholder="Enter Employee Name" name="employeeName" value={this.state.data.employeeName} onChange = {this.onChange} required/>
+          <form onSubmit={this.clicked}> 
+            <label htmlFor="employeeSearch"><b>Enter Employee Email</b></label><br/>
+            <input id="employeeSearch" className="fadeIn third" type="text" placeholder="Enter Employee Email" name="email" value={this.state.data.email} onChange = {this.onChange} required/>
+            <button type="submit" className="button">Search</button>
           </form>
         </div>
+        {this.state.data.showReport?
+        <div>
+        <table style={{textTransform:"lowercase"}}>
+                <tr>
+                    <th>Audio</th>
+                    <th>date</th>
+                    <th>positive</th>
+                    <th>Negative</th>
+                    <th>Neutral</th>
+                    <th>Net Sentiment</th>
+                </tr>
+                {this.state.data.info.map(ele =>(
+                    <tr>
+                        <th><a href={ele.audiolink} target="_blank">Audio Link</a></th>
+                        <th>{ele.date.substring(0,ele.date.indexOf("T"))}</th>
+                        <th>{ele.positive}</th>
+                        <th>{ele.negative}</th>
+                        <th>{ele.neutral}</th>
+                        <th>{ele.sentiment}</th>
+                    </tr>
+                ))}
+            </table></div>:<div></div>}
       </div>
     </div>
   </div>
