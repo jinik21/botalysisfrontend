@@ -1,4 +1,5 @@
 import React from "react";
+import Signout from "./pages/Signout";
 
 
 class AdminProfilePage extends React.Component{
@@ -81,6 +82,9 @@ class AdminProfilePage extends React.Component{
             <input id="employeeSearch" className="fadeIn third" type="text" placeholder="Enter Employee Email" name="email" value={this.state.data.email} onChange = {this.onChange} required/>
             <button type="submit" className="button">Search</button>
           </form>
+        </div>
+        <div>
+        <Signout />
         </div>
         {this.state.data.showReport?
         <div>

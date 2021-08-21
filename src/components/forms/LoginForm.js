@@ -44,10 +44,14 @@ import { withRouter } from 'react-router-dom';
     })
         .then(response=>response.json())
         .then(user=>{
-          console.log(user);
-            if(user.email){
+          console.log(user.isvalid);
+            if(user.email  && user.isvalid==false){
               localStorage.setItem("user", JSON.stringify(user));
               this.props.history.push("/employeePage");
+            }
+            else if(user.email  && user.isvalid==true){
+              localStorage.setItem("user", JSON.stringify(user));
+              this.props.history.push("/adminPage");
             }
             else{
                 alert('No matching Credentials!');
