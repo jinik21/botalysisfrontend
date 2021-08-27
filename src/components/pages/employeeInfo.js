@@ -31,6 +31,32 @@ class EmployeeInfo extends React.Component{
             console.log(err)
           }
       }; 
+
+      netSentiment=()=>{
+        var s;
+        this.state.data.map(ele=>{
+          s=s+ele.netSentiment;
+        });
+        var sent=s/(this.state.data.length);
+        if(sent==0){
+          return "Neutral";
+        } else if(sent>0){
+          return "Positive";
+        } else{
+          return "Negative";
+        }
+      }
+      sentimentName=(s)=> {
+        if(s==0){
+            return "Neutral";
+        }
+        else if(s>0){
+            return "Positive";
+        }
+        else{
+          return "Negative";
+        }
+      }
     render(){
         return (
             <div>
@@ -39,7 +65,7 @@ class EmployeeInfo extends React.Component{
                 </button>
            
 
-            {this.state.tableShow?<table style={{textTransform:"lowercase"}}>
+            {this.state.tableShow?<div><table style={{textTransform:"lowercase"}}>
                 <tr>
                     <th>Audio</th>
                     <th>date</th>
@@ -55,10 +81,11 @@ class EmployeeInfo extends React.Component{
                         <th>{ele.positive}</th>
                         <th>{ele.negative}</th>
                         <th>{ele.neutral}</th>
-                        <th>{ele.sentiment}</th>
+                        <th>{this.sentimentName(ele.sentiment)}</th>
                     </tr>
                 ))}
-            </table>:<div></div>}
+            </table>
+            <h2>Net Sentiment: {this.netSentiment()}</h2></div>:<div></div>}
             </div>
         );
     }    

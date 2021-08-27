@@ -42,6 +42,56 @@ class AdminProfilePage extends React.Component{
        console.log(err)
      }
  }; 
+
+  allClicked=async(e)=>{
+    e.preventDefalut();
+    try{
+      fetch('http://localhost:3001/api/allusersaudioadmin',{
+        method: 'post',
+        headres:{ 'Content-type': 'application/json'},
+        body:JSON.stringify({
+          email:''
+        })
+      })
+      .then(response => response.json())
+         .then(data1 => {
+           //console.log(data1);
+           this.setState({data: {...this.state.data, info: data1}});
+           //this.setState({[this.state.data.info]:data1})
+           this.setState({data: {...this.state.data, showReport: true}});
+           console.log(this.state.data.showReport);
+         })
+     } 
+     catch (err) {
+       console.log(err)
+     }
+    };
+
+   sentimentName=(s)=> {
+    if(s==0){
+        return "Neutral";
+    }
+    else if(s>0){
+        return "Positive";
+    }
+    else{
+      return "Negative";
+    }
+  }
+  netSentiment=()=>{
+    var s;
+    this.state.data.info.map(ele=>{
+      s=s+ele.netSentiment;
+    });
+    var sent=s/(this.state.data.length);
+    if(sent==0){
+      return "Neutral";
+    } else if(sent>0){
+      return "Positive";
+    } else{
+      return "Negative";
+    }
+  };
   render(){
     return(
     <div>
@@ -78,13 +128,17 @@ class AdminProfilePage extends React.Component{
             <input id="employeeSearch" className="fadeIn third" type="text" placeholder="Enter Employee Email" name="email" value={this.state.data.email} onChange = {this.onChange} required/>
             <button type="submit" className="button">Search</button>
           </form>
+          {/* <form onSubmit={this.allClicked}>
+            <button type="submit" className="button">See Results of all Employees</button>
+          </form> */}
         </div>
         <div>
         <Signout />
         </div>
         {this.state.data.showReport?
         <div>
-        <table style={{textTransform:"lowercase"}}>
+        <table style={{
+          textTransform:"lowercase"}}>
                 <tr>
                     <th>Audio</th>
                     <th>date</th>
@@ -100,10 +154,10 @@ class AdminProfilePage extends React.Component{
                         <th>{ele.positive}</th>
                         <th>{ele.negative}</th>
                         <th>{ele.neutral}</th>
-                        <th>{ele.sentiment}</th>
+                        <th>{this.sentimentName(ele.sentiment)}</th>
                     </tr>
                 ))}
-            </table></div>:<div></div>}
+            </table><h2>Net Sentiment: {this.netSentiment()}</h2></div>:<div></div>}
       </div>
     </div>
   </div>

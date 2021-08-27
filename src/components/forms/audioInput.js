@@ -132,7 +132,7 @@ class AudioInput extends React.Component {
     return (
       <div>
         <div>
-          <input type="file" onChange={this.onFileChange} className="audioInputFile" />
+          <input type="file" onChange={this.onFileChange} className="audioInputFile" accept="audio.wav"/>
           <button style={{backgroundColor:'rgba(56, 63, 95, 0.2)'}} onClick={this.onFileUpload} className="uploadButton">
             Upload!
           </button>

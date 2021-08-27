@@ -1135,6 +1135,8 @@ table {
     border: 1px solid rgb(233, 233, 235);
 	margin-bottom: 2rem;
 	width: 100%;
+	/* width: 100vw;
+	margin-left:calc(-50vw + 50%); */
 }
 
 table td,
@@ -1549,3 +1551,9 @@ employeeProfilePage .reportTable{
 audioInput .uploadButton{
 	color: rgba(0,0,0,0.3);
 }
+
+/* .wid-table{
+	width: 100vw;
+	margin-left:calc(-50vw + 50%);
+	border: 2px solid green;
+} */
