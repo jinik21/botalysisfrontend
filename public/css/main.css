@@ -566,6 +566,15 @@ header nav a.active:after {
 	display: block;
 	float: none;
 }
+.hero1 {
+	text-align: center;
+	padding: 0rem 6rem 0;
+	margin: auto;
+	max-width: 1500px;
+	margin-top: 9rem;
+	display: block;
+	float: none;
+}
 
 .hero h1 {
 	font-size: 4rem;
