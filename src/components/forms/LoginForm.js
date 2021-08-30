@@ -22,7 +22,7 @@ import { withRouter } from 'react-router-dom';
 
    onChange = e => this.setState({data: {...this.state.data, [e.target.name]: e.target.value}});
    onChangeToggle=e=>{
-    if(e.target.value=='false'){
+    if(e.target.value==='false'){
       this.setState({data:{...this.state.data,[e.target.name]:'true'}});
     }
     else{
@@ -45,11 +45,11 @@ import { withRouter } from 'react-router-dom';
         .then(response=>response.json())
         .then(user=>{
           console.log(user.isvalid);
-            if(user.email  && user.isvalid==false){
+            if(user.email  && user.isvalid===false){
               localStorage.setItem("user", JSON.stringify(user));
               this.props.history.push("/employeePage");
             }
-            else if(user.email  && user.isvalid==true){
+            else if(user.email  && user.isvalid===true){
               localStorage.setItem("user", JSON.stringify(user));
               this.props.history.push("/adminPage");
             }
@@ -66,12 +66,12 @@ import { withRouter } from 'react-router-dom';
 
         <form onSubmit = {this.onSubmitSignIn} >
             <label htmlFor="email"><b>Email</b></label><br/>
-            <input id="login" className="fadeIn second" type="email" placeholder="Enter Email" id="email" name="email" value={data.email} onChange = {this.onChange} required/>
+            <input className="fadeIn second" type="email" placeholder="Enter Email" id="email" name="email" value={data.email} onChange = {this.onChange} required/>
 
             <br/><br/>
 
             <label htmlFor="password"><b>Password</b></label><br/>
-            <input id="password" className="fadeIn third" type="password" placeholder="Enter Password" id="password" name="password" value={data.password} onChange = {this.onChange} required/>
+            <input className="fadeIn third" type="password" placeholder="Enter Password" id="password" name="password" value={data.password} onChange = {this.onChange} required/>
 
 
             <br/><br/>

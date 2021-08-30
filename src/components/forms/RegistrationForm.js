@@ -1,10 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import {Button } from 'semantic-ui-react';
-import Toggle from 'react-toggle';
 import "react-toggle/style.css";
 import 'react-phone-number-input/style.css';
-import PhoneInput from 'react-phone-number-input';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import { withRouter } from 'react-router-dom';
@@ -36,7 +33,7 @@ import { withRouter } from 'react-router-dom';
    }
    onSubmitSignUp = (event) => {
      event.preventDefault();
-    if (this.state.data.password.length >= 8 && this.state.data.cnfrmpassword.length >= 8 && this.state.data.phone.length==13) {
+    if (this.state.data.password.length >= 8 && this.state.data.cnfrmpassword.length >= 8 && this.state.data.phone.length===13) {
       if((this.state.data.password === this.state.data.cnfrmpassword )&& (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.data.email,))){
         fetch('http://localhost:3001/api/signup', {
         method: 'post',
@@ -76,7 +73,7 @@ import { withRouter } from 'react-router-dom';
      const options = [
       'None','Mumbai, India', 'Manhattan, USA', 'Sydney, Australia', 'London, UK', 'Delhi, India'
     ];
-    const defaultOption = options[0];
+    //const defaultOption = options[0];
 
      return(
 

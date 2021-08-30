@@ -34,11 +34,12 @@ class EmployeeInfo extends React.Component {
 
   netSentiment = () => {
     var s;
-    this.state.data.map(ele => {
-      s = s + ele.netSentiment;
-    });
+    this.state.data.map(ele => (s = s + ele.netSentiment));
+    // this.state.data.forEach(ele => {
+    //   s=s+ele.netSentiment;
+    // });
     var sent = s / (this.state.data.length);
-    if (sent == 0) {
+    if (sent === 0) {
       return "Neutral";
     } else if (sent > 0) {
       return "Positive";
@@ -47,7 +48,7 @@ class EmployeeInfo extends React.Component {
     }
   }
   sentimentName = (s) => {
-    if (s == 0) {
+    if (s === 0) {
       return "Neutral";
     }
     else if (s > 0) {

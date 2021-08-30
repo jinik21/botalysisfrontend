@@ -1,12 +1,11 @@
-import axios from 'axios';
-import React, { Component } from 'react';
+import React from 'react';
 import firebase from '../../firebase';
 import {
   CircularProgressbar,
-  CircularProgressbarWithChildren,
   buildStyles
 } from 'react-circular-progressbar';
 import { withRouter } from 'react-router-dom';
+import ReactLoading from 'react-loading';
 
 var storageRef = firebase.storage().ref();
 
@@ -32,6 +31,7 @@ class AudioInput extends React.Component {
       negativePercentage : null,
       neutralPercentage :null,
       tableShow : false,
+      isLoading:null,
     }
   };
 
@@ -52,6 +52,7 @@ class AudioInput extends React.Component {
       console.log(this.state.selectedFile);
       try {
         const blob = toBlob(this.state.selectedFile);
+        this.setState({isLoading:true})
         console.log(blob);
         var mountainsRef = await storageRef.child(this.state.selectedFile.name);
         await mountainsRef.put(blob, metadata);
@@ -73,7 +74,7 @@ class AudioInput extends React.Component {
             this.setState({ positivePercentage:0 });
             this.setState({ negativePercentage:0});
             this.setState({ neutralPercentage:0 });
-            this.setState({tableShow:true}),
+            this.setState({tableShow:true})
             setTimeout(()=>{
               fetch('http://localhost:3001/api/sentiment', {
               method: 'post',
@@ -87,6 +88,7 @@ class AudioInput extends React.Component {
                 this.setState({ positivePercentage:data.positive });
                 this.setState({ negativePercentage:data.negative});
                 this.setState({ neutralPercentage:data.neutral });
+                this.setState({isLoading:false});
                 console.log(data);
               })
   
@@ -139,6 +141,9 @@ class AudioInput extends React.Component {
         </div>
         {this.fileData()}
         <div>
+          <div className="center">
+           {this.state.isLoading===true?<div className="center"><ReactLoading type={"bars"} color={"white"} /></div>:<div></div>}
+          </div>
           {this.state.tableShow?(<table className="reportTable">
             <tr>
               <th><CircularProgressbar

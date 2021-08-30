@@ -1,11 +1,4 @@
 import React from "react";
-import react from "react";
-import { CircularProgressbar, 
-    CircularProgressbarWithChildren,
-    buildStyles } from 'react-circular-progressbar';
-    const positivePercentage = 66; 
-    const negativePercentage = 14;
-    const neutralPercentage = 20;
 class EmployeeReport extends React.Component{
     
     render(){

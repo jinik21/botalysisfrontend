@@ -2,7 +2,6 @@ import React from 'react';
 import {Link} from "react-router-dom";
 import LoginForm from "../forms/LoginForm";
 import axios from 'axios';
-import {Button } from 'semantic-ui-react';
 import './Logo.png';
 
 
@@ -18,12 +17,12 @@ submit = data => {
       password:data.password
     })
     .then(function(response){
-      var email = response.data.email;
+    //   var email = response.data.email;
 
-      //This part is responsible for the window navigation after login.
-      response.data.success
-      ?  (document.getElementById('status').innerHTML = "Login Successfull! You are being redirected to landing page in 5 seconds.",setTimeout(() => {window.location.replace('/landing?name='+ email)},5000))
-      : document.getElementById('status').innerHTML = response.data.message
+    //   //This part is responsible for the window navigation after login.
+    //   response.data.success
+    //   ?  (document.getElementById('status').innerHTML = "Login Successfull! You are being redirected to landing page in 5 seconds.",setTimeout(() => {window.location.replace('/landing?name='+ email)},5000))
+    //   : document.getElementById('status').innerHTML = response.data.message
     });
   };
 
