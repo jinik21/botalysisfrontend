@@ -1,7 +1,6 @@
 import React from 'react';
 import firebase from '../../firebase';
-import {
-  CircularProgressbar,
+import { CircularProgressbarWithChildren,
   buildStyles
 } from 'react-circular-progressbar';
 import { withRouter } from 'react-router-dom';
@@ -146,41 +145,53 @@ class AudioInput extends React.Component {
           </div>
           {this.state.tableShow?(<table className="reportTable">
             <tr>
-              <th><CircularProgressbar
+              <th><CircularProgressbarWithChildren
                 className="percentageBar"
                 value={this.state.positivePercentage}
-                text={`${this.state.positivePercentage}%`}
+                //text={`${this.state.positivePercentage}%`}
                 styles={buildStyles({
                   strokeLinecap: 'butt',
-                  textSize: '16px',
+                  textSize: '12px',
                   pathTransitionDuration: 0.5,
                   pathColor: '#92fb61',
                   textColor: '#92fb61',
                   backgroundColor: '#E0D2D0',
-                })} /></th>
-              <th><CircularProgressbar
+                })} >
+                  <p style={{textAlign:"center", marginTop:"-27px", marginLeft:"20px", fontSize:"16px", color:"#92fb61"}}>{this.state.positivePercentage}%</p>
+                  </CircularProgressbarWithChildren>
+                </th>
+              <th><CircularProgressbarWithChildren
                 value={this.state.neutralPercentage}
-                text={`${this.state.neutralPercentage}%`}
+                //text={`${this.state.neutralPercentage}%`}
                 styles={buildStyles({
                   strokeLinecap: 'butt',
-                  textSize: '16px',
+                  textSize: '8px',
                   pathTransitionDuration: 0.5,
                   pathColor: '#d6d6d6',
                   textColor: '#d6d6d6',
                   backgroundColor: '#E0D2D0',
-                })} /></th>
-              <th><CircularProgressbar
+                })} >
+                  <p style={{textAlign:"center", marginTop:"-27px", marginLeft:"20px", fontSize:"16px", color:"#d6d6d6"}}>{this.state.neutralPercentage}%</p>
+                  </CircularProgressbarWithChildren></th>
+              <th><CircularProgressbarWithChildren
                 value={this.state.negativePercentage}
-                text={`${this.state.negativePercentage}%`}
+                //text={`${this.state.negativePercentage}%`}
                 styles={buildStyles({
                   strokeLinecap: 'butt',
-                  textSize: '16px',
+                  textSize: '8px',
                   pathTransitionDuration: 0.5,
                   pathColor: '#f88',
                   textColor: '#f88',
                   backgroundColor: '#E0D2D0',
-                })} /></th>
+                })} >
+                  <p style={{textAlign:"center", marginTop:"-27px", marginLeft:"20px", fontSize:"16px", color:"#f88"}}>{this.state.negativePercentage}%</p>
+                  </CircularProgressbarWithChildren></th>
             </tr>
+            {/* <tr>
+              <th>{this.state.positivePercentage}</th>
+              <th>{this.state.neutralPercentage}</th>
+              <th>{this.state.negativePercentage}</th>
+            </tr> */}
           </table>):<div></div>}
         </div>
       </div>
