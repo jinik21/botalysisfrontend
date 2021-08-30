@@ -34,6 +34,7 @@ import { withRouter } from 'react-router-dom';
    onSubmitSignUp = (event) => {
      event.preventDefault();
     if (this.state.data.password.length >= 8 && this.state.data.cnfrmpassword.length >= 8 && this.state.data.phone.length===13) {
+      //eslint-disable-next-line
       if((this.state.data.password === this.state.data.cnfrmpassword )&& (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.data.email,))){
         fetch('http://localhost:3001/api/signup', {
         method: 'post',
