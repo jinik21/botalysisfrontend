@@ -39,10 +39,6 @@
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/jinik21/botalysisfrontend/issues"
-  },
-  "homepage": "https://github.com/jinik21/botalysisfrontend#readme",
   "browserslist": {
     "production": [
       ">0.2%",
