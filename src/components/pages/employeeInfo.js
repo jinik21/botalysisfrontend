@@ -13,7 +13,7 @@ class EmployeeInfo extends React.Component {
     try {
       console.log(this.state.u);
       // setTimeout(()=>{},5000);
-      fetch('http://localhost:3001/api/allsentimentuser', {
+      fetch('https://botalysis.herokuapp.com/api/allsentimentuser', {
         method: 'post',
         headers: { 'Content-type': 'application/json' },
         body: JSON.stringify({

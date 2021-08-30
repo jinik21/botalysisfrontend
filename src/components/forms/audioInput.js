@@ -60,7 +60,7 @@ class AudioInput extends React.Component {
         console.log(res);
         console.log(this.state.u);
         // setTimeout(()=>{},5000);
-        fetch('http://localhost:3001/api/process_audio', {
+        fetch('https://botalysis.herokuapp.com/api/process_audio', {
           method: 'post',
           headers: { 'Content-type': 'application/json' },
           body: JSON.stringify({
@@ -76,7 +76,7 @@ class AudioInput extends React.Component {
             this.setState({ neutralPercentage:0 });
             this.setState({tableShow:true})
             setTimeout(()=>{
-              fetch('http://localhost:3001/api/sentiment', {
+              fetch('https://botalysis.herokuapp.com/api/sentiment', {
               method: 'post',
               headers: { 'Content-type': 'application/json' },
               body: JSON.stringify({

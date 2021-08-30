@@ -22,7 +22,7 @@ class AdminProfilePage extends React.Component {
     try {
       //console.log(this.state.u);
       // setTimeout(()=>{},5000);
-      fetch('http://localhost:3001/api/allusersaudioadmin', {
+      fetch('https://botalysis.herokuapp.com/api/allusersaudioadmin', {
         method: 'post',
         headers: { 'Content-type': 'application/json' },
         body: JSON.stringify({
@@ -44,7 +44,7 @@ class AdminProfilePage extends React.Component {
   allClicked = async () => {
     // e.preventDefalut();
     try {
-      await fetch('http://localhost:3001/api/allusersallaudioadmin', {
+      await fetch('https://botalysis.herokuapp.com/api/allusersallaudioadmin', {
         method: 'get',
         headers: { 'Content-type': 'application/json' }
       })
