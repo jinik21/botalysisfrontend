@@ -11,6 +11,7 @@ class AdminProfilePage extends React.Component {
         email: '',
         showReport: false,
         info: [],
+        isAll:false,
       }
     }
   }
@@ -32,7 +33,7 @@ class AdminProfilePage extends React.Component {
         .then(response => response.json())
         .then(data1 => {
           this.setState({ data: { ...this.state.data, info: data1 } });
-          this.setState({ data: { ...this.state.data, showReport: true } });
+          this.setState({ data: { ...this.state.data, showReport: true, } });
           console.log(this.state.data.showReport);
         })
     }
@@ -53,7 +54,7 @@ class AdminProfilePage extends React.Component {
           console.log(data1);
           this.setState({ data: { ...this.state.data, info: data1 } });
           console.log(this.state.data.info);
-          this.setState({ data: { ...this.state.data, showReport: true } });
+          this.setState({ data: { ...this.state.data, showReport: true,isAll:true } });
           console.log(this.state.data.showReport);
         })
     }
@@ -144,6 +145,7 @@ class AdminProfilePage extends React.Component {
               }}>
                 <tr>
                   <th>Audio</th>
+                  {this.state.data.isAll?<th>Employee Email</th>:<th></th>}
                   <th>date</th>
                   <th>positive</th>
                   <th>Negative</th>
@@ -153,6 +155,7 @@ class AdminProfilePage extends React.Component {
                 {this.state.data.info.map(ele => (
                   <tr>
                     <th><a href={ele.audiolink} target="_blank">Audio Link</a></th>
+                    {this.state.data.isAll?<th>{ele.email}</th>:<th></th>}
                     <th>{ele.date.substring(0, ele.date.indexOf("T"))}</th>
                     <th>{ele.positive}</th>
                     <th>{ele.negative}</th>
