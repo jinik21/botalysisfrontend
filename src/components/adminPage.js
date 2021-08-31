@@ -95,7 +95,7 @@ class AdminProfilePage extends React.Component {
                 <div class="col-lg-4">
                   <div class="card shadow-sm">
                     <div class="card-header bg-transparent text-center">
-                      <img class="profile_img" src="https://i.dlpng.com/static/png/5066008-circled-user-icon-user-profile-icon-png-png-image-transparent-profile-icon-png-820_860_preview.png" alt="student dp"></img>
+                      <img class="profile_img" src="../images/user.svg" alt="student dp"></img>
                       <h3>{this.state.data.u.name}</h3>
                     </div>
                   </div>

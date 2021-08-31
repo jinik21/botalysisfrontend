@@ -12,8 +12,8 @@ html {
 body {
   font-family: "Poppins", sans-serif;
   height: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
+  /* overflow-x: ;
+  overflow-y: auto; */
 }
 
 a {
@@ -447,7 +447,7 @@ footer h5 {
 /* Header */
 
 header {
-	width: 95%;
+	/* width: 95%; */
 	height: 9.1rem;
 	margin: auto;
 	z-index: 1;
@@ -461,7 +461,7 @@ header {
 .header-logo {
 	position: absolute;
 	left: left;
-	width: 15rem;
+	width: 95%;
 }
 
 .header-logo a {
@@ -530,6 +530,16 @@ header nav a.active:after {
 	border-color: rgba(255, 255, 255, 1);
 }
 
+.head{
+	display: flex;
+	justify-content: space-between;
+    align-items: center;
+}
+
+.head img {
+	margin-left: auto;
+}
+
 .button {
 	background-color: #68b9ec;
 	border-radius: 100rem;
@@ -547,7 +557,36 @@ header nav a.active:after {
 	margin-bottom: 1.5rem;
 	height: 3.2rem;
 	border: none;
+	align-self: flex-start;
 }
+
+.buttonChat{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #68b9ec;
+	border-radius: 100rem;
+	color: #ffffff;
+	transition: all .3s ease-in-out 0s;
+	padding: .8rem 2rem .7rem;
+	text-transform: uppercase;
+	text-decoration: none;
+	letter-spacing: .1rem;
+	text-indent: -.05rem;
+	font-size: .9rem;
+	font-weight: 500;
+	height: 3.2rem;
+	border: none;
+}
+
+.buttonChat img{
+	width: 40px;
+	height: 40px;
+	max-width: initial;
+}
+
+
+
 
 .button:hover {
 	transform: scale(1.1);
